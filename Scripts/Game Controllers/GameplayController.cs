@@ -9,9 +9,13 @@ public class GameplayController : MonoBehaviour {
     [HideInInspector]
     public bool gamePlaying;
 
+    [SerializeField]
+    private GameObject tile;
+    private Vector3 currentTilePosition;
 	// Use this for initialization
 	void Awake () {
         MakeSingleton();
+        currentTilePosition = new Vector3(-2, 0, 3);
 	}
 
     void OnDisabble ()
@@ -26,4 +30,20 @@ public class GameplayController : MonoBehaviour {
             instance = this;
         }
 	}
+
+    void CreateTiles ()
+    {
+        Vector3 newTilePosition = currentTilePosition;
+        int rand = Random.Range(0, 100);
+
+        if (rand < 50)
+        {
+            newTilePosition.x -= 1f;
+        }else
+        {
+            newTilePosition.z += 1f;
+        }
+        currentTilePosition = newTilePosition;
+        Instantiate(tile, currentTilePosition, Quaternion.identity);
+    }
 }
