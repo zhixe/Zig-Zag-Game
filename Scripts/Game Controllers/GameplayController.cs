@@ -14,12 +14,44 @@ public class GameplayController : MonoBehaviour {
     private Vector3 currentTilePosition;
     private AudioSource audioSource;
 
-	// Use this for initialization
-	void Awake () {
+    [SerializeField]
+    private Material tileMat;
+
+    [SerializeField]
+    private Light dayLight;
+
+    private Camera mainCamera;
+
+    private bool CamColorLerp;
+
+    private Color cameraColor;
+
+    private Color[] tileColor_Day;
+    private Color tileColor_Night;
+    private int tileColor_Index;
+
+    private Color tileTrueColor;
+
+    private float timer;
+    private float timeInterval = 10f;
+
+    private float camLerpTimer;
+    private float camLerpInterval = 1f;
+
+    // Use this for initialization
+    void Awake () {
         MakeSingleton();
         audioSource = GetComponent<AudioSource>();
         currentTilePosition = new Vector3(-2, 0, 2);
-	}
+        mainCamera = Camera.main;
+        cameraColor = mainCamera.backgroundColor;
+        tileColor_Index = 0;
+        tileColor_Day = new Color[3];
+        tileColor_Day[0] = new Color(10 / 256f, 139 / 256f, 203 / 256f);
+        tileColor_Day[1] = new Color(10 / 256f, 200 / 256f, 20 / 256f);
+        tileColor_Day[2] = new Color(220 / 256f, 170 / 256f, 45 / 256f);
+        tileColor_Night = new Color(0, 8 / 256f, 11 / 256f);
+    }
 
     void Start()
     {
