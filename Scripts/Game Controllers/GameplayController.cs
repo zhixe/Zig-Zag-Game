@@ -33,10 +33,12 @@ public class GameplayController : MonoBehaviour {
     private Color tileTrueColor;
 
     private float timer;
-    private float timeInterval = 10f;
+    private float timerInterval = 5f;
 
     private float camLerpTimer;
     private float camLerpInterval = 1f;
+
+    private int direction = 1;
 
     // Use this for initialization
     void Awake () {
@@ -51,6 +53,7 @@ public class GameplayController : MonoBehaviour {
         tileColor_Day[1] = new Color(10 / 256f, 200 / 256f, 20 / 256f);
         tileColor_Day[2] = new Color(220 / 256f, 170 / 256f, 45 / 256f);
         tileColor_Night = new Color(0, 8 / 256f, 11 / 256f);
+        tileMat.color = tileColor_Day[0];
     }
 
     void Start()
@@ -59,6 +62,11 @@ public class GameplayController : MonoBehaviour {
         {
             CreateTiles();
         }
+    }
+
+    void Update()
+    {
+        CheckLerpTimer();
     }
 
     void OnDisabble ()
@@ -88,6 +96,46 @@ public class GameplayController : MonoBehaviour {
         }
         currentTilePosition = newTilePosition;
         Instantiate(tile, currentTilePosition, Quaternion.identity);
+    }
+
+    void CheckLerpTimer ()
+    {
+        timer += Time.deltaTime;
+        if (timer > timerInterval)
+        {
+            timer -= timerInterval;
+            CamColorLerp = true;
+            camLerpTimer = 0f;
+        }
+
+        if (CamColorLerp)
+        {
+            camLerpTimer += Time.deltaTime;
+            float percent = camLerpTimer / camLerpInterval;
+            if (direction == 1)
+            {
+                mainCamera.backgroundColor = Color.Lerp(cameraColor, Color.black, percent);
+                tileMat.color = Color.Lerp(tileColor_Day[tileColor_Index], tileColor_Night, percent);
+                dayLight.intensity = 1f - percent;
+            } else
+            {
+                mainCamera.backgroundColor = Color.Lerp(Color.black, cameraColor, percent);
+                tileMat.color = Color.Lerp(tileColor_Night, tileColor_Day[tileColor_Index], percent);
+                dayLight.intensity = percent;
+            }
+
+            if (percent > 0.98f)
+            {
+                camLerpTimer = 1f;
+                direction *= -1;
+                CamColorLerp = false;
+
+                if (direction == -1)
+                {
+                    tileColor_Index = Random.Range(0, tileColor_Day.Length);
+                }
+            }
+        }
     }
 
     public void ActiveTileSpawner()
