@@ -12,9 +12,12 @@ public class GameplayController : MonoBehaviour {
     [SerializeField]
     private GameObject tile;
     private Vector3 currentTilePosition;
+    private AudioSource audioSource;
+
 	// Use this for initialization
 	void Awake () {
         MakeSingleton();
+        audioSource = GetComponent<AudioSource>();
         currentTilePosition = new Vector3(-2, 0, 2);
 	}
 
@@ -58,6 +61,11 @@ public class GameplayController : MonoBehaviour {
     public void ActiveTileSpawner()
     {
         StartCoroutine(SpawnNewTiles());
+    }
+
+    public void PlayCollectableSound ()
+    {
+        audioSource.Play();
     }
 
     IEnumerator SpawnNewTiles()
