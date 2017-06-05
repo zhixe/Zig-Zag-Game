@@ -39,12 +39,18 @@ public class BallScript : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-
+            if (!GameplayController.instance.gamePlaying)
+            {
+                GameplayController.instance.gamePlaying = true;
+            }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (GameplayController.instance.gamePlaying)
         {
-            rollLeft = !rollLeft;
+            if (Input.GetMouseButtonDown(0))
+            {
+                rollLeft = !rollLeft;
+            }
         }
     }
 }// Class
