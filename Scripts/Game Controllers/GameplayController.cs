@@ -47,6 +47,7 @@ public class GameplayController : MonoBehaviour {
         currentTilePosition = new Vector3(-2, 0, 2);
         mainCamera = Camera.main;
         cameraColor = mainCamera.backgroundColor;
+        tileTrueColor = tileMat.color;
         tileColor_Index = 0;
         tileColor_Day = new Color[3];
         tileColor_Day[0] = new Color(10 / 256f, 139 / 256f, 203 / 256f);
@@ -72,10 +73,12 @@ public class GameplayController : MonoBehaviour {
     void OnDisabble ()
     {
         instance = null;
+        tileMat.color = tileTrueColor;
+        //0A8ACAFF
     }
-	
-	// Update is called once per frame
-	void MakeSingleton () {
+
+    // Update is called once per frame
+    void MakeSingleton () {
 		if (instance == null)
         {
             instance = this;
