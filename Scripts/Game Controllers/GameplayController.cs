@@ -54,4 +54,20 @@ public class GameplayController : MonoBehaviour {
         currentTilePosition = newTilePosition;
         Instantiate(tile, currentTilePosition, Quaternion.identity);
     }
+
+    public void ActiveTileSpawner()
+    {
+        StartCoroutine(SpawnNewTiles());
+    }
+
+    IEnumerator SpawnNewTiles()
+    {
+        yield return new WaitForSeconds(0.3f);
+        CreateTiles();
+
+        if (gamePlaying)
+        {
+            StartCoroutine(SpawnNewTiles());
+        }
+    }
 }

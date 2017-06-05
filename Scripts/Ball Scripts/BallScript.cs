@@ -42,6 +42,7 @@ public class BallScript : MonoBehaviour {
             if (!GameplayController.instance.gamePlaying)
             {
                 GameplayController.instance.gamePlaying = true;
+                GameplayController.instance.ActiveTileSpawner();
             }
         }
 
