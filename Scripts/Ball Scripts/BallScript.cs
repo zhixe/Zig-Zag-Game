@@ -17,17 +17,21 @@ public class BallScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        CheckInput();
 	}
 
     void FixedUpdate ()
     {
-        if (rollLeft)
+        if (GameplayController.instance.gamePlaying)
         {
-            myBody.velocity = new Vector3(-speed, Physics.gravity.y, 0f);
-        } else
-        {
-            myBody.velocity = new Vector3(0f, Physics.gravity.y, speed);
+            if (rollLeft)
+            {
+                myBody.velocity = new Vector3(-speed, Physics.gravity.y, 0f);
+            }
+            else
+            {
+                myBody.velocity = new Vector3(0f, Physics.gravity.y, speed);
+            }
         }
     }
 
