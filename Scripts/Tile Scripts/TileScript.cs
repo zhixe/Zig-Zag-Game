@@ -7,14 +7,30 @@ public class TileScript : MonoBehaviour {
     private Rigidbody myBody;
     private AudioSource audioSource;
 
+    [SerializeField]
+    private GameObject gem;
+
+    [SerializeField]
+    private float chanceForCollectable;
+
 	// Use this for initialization
 	void Awake () {
         myBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void Start()
+    {
+        if (Random.value < chanceForCollectable)
+        {
+            Vector3 temp = transform.position;
+            temp.y += 2f;
+            Instantiate(gem, temp, Quaternion.identity);
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

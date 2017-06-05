@@ -11,8 +11,8 @@ public class SparkleScript : MonoBehaviour {
 
     IEnumerator DeactiveAfterTime()
     {
-        yield return new WaitForSeconds(1.5f);
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(0f);
+        gameObject.SetActive(true);
     }
 
 	/* Update is called once per frame
