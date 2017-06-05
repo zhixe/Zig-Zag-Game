@@ -15,8 +15,16 @@ public class GameplayController : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         MakeSingleton();
-        currentTilePosition = new Vector3(-2, 0, 3);
+        currentTilePosition = new Vector3(-2, 0, 2);
 	}
+
+    void Start()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            CreateTiles();
+        }
+    }
 
     void OnDisabble ()
     {
