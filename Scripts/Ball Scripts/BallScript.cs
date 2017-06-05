@@ -18,6 +18,7 @@ public class BallScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         CheckInput();
+        CheckBallOutOfBounds();
 	}
 
     void FixedUpdate ()
@@ -31,6 +32,18 @@ public class BallScript : MonoBehaviour {
             else
             {
                 myBody.velocity = new Vector3(0f, Physics.gravity.y, speed);
+            }
+        }
+    }
+
+    void CheckBallOutOfBounds ()
+    {
+        if (GameplayController.instance.gamePlaying)
+        {
+            if (transform.position.y < -4)
+            {
+                GameplayController.instance.gamePlaying = false;
+                Destroy(gameObject);
             }
         }
     }
