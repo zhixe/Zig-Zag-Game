@@ -10,6 +10,6 @@ Game Documentation
 - The ball will move automatically once the mouse button has been clicked by the player
 - Player must use the mouse to control the ball movement by clicking on the 'Left' button
 - Crystals will appeared randomly on the platform
-- Each collected crystal gave 10 points for player
+- Each collected crystal gave 10 points to the player
 - The background and the platform color will changed randomly
 - Collect as many crystals across the platform without falling down
