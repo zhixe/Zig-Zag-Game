@@ -7,7 +7,8 @@
 
 Game Documentation
 - The game started with a ball on the empty platform
-- The ball will move automatically once the mouse button has been clicked by the player
+- The ball move automatically to the right direction once the mouse button has been clicked by the player
+- Once the mouse button has been clicked by the player again, the ball will change it's direction to the left and vice versa
 - Player must use the mouse to control the ball movement by clicking on the 'Left' button
 - Crystals will appeared randomly on the platform
 - Each collected crystal gave 10 points to the player
